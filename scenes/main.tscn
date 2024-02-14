@@ -1,0 +1,146 @@
+[gd_scene load_steps=7 format=3 uid="uid://cx22fyhok5kxj"]
+
+[ext_resource type="Script" path="res://scenes/main.gd" id="1_o6hkd"]
+[ext_resource type="PackedScene" uid="uid://78d1au00vofa" path="res://scenes/card.tscn" id="2_cwt7j"]
+[ext_resource type="Script" path="res://scenes/CardStack.gd" id="3_x51up"]
+[ext_resource type="Script" path="res://scenes/CreateButton.gd" id="3_xb6ba"]
+[ext_resource type="Script" path="res://scenes/JoinButton.gd" id="4_3yh6e"]
+[ext_resource type="Script" path="res://scenes/GameFlowController.gd" id="6_ww3ou"]
+
+[node name="Main" type="Node2D" node_paths=PackedStringArray("main_layer", "bottom_card_stack", "top_card_stack", "win_view")]
+script = ExtResource("1_o6hkd")
+main_layer = NodePath("MainLayer")
+card_scene = ExtResource("2_cwt7j")
+bottom_card_stack = NodePath("MainLayer/BottomCardStack")
+top_card_stack = NodePath("MainLayer/TopCardStack")
+win_view = NodePath("UILayer/WinView")
+
+[node name="BackgroundLayer" type="CanvasLayer" parent="."]
+layer = -1
+
+[node name="ColorRect" type="ColorRect" parent="BackgroundLayer"]
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+mouse_filter = 2
+color = Color(0.839216, 0.694118, 0.423529, 1)
+
+[node name="MainLayer" type="CanvasLayer" parent="."]
+
+[node name="TopCardStack" type="Node2D" parent="MainLayer"]
+script = ExtResource("3_x51up")
+
+[node name="BottomCardStack" type="Node2D" parent="MainLayer"]
+script = ExtResource("3_x51up")
+is_self = true
+
+[node name="UILayer" type="CanvasLayer" parent="."]
+
+[node name="CreateButton" type="Button" parent="UILayer"]
+offset_left = 15.0
+offset_top = 10.0
+offset_right = 93.0
+offset_bottom = 42.0
+text = "Create
+"
+script = ExtResource("3_xb6ba")
+
+[node name="JoinButton" type="Button" parent="UILayer"]
+offset_left = 111.0
+offset_top = 10.0
+offset_right = 189.0
+offset_bottom = 42.0
+text = "Join
+"
+script = ExtResource("4_3yh6e")
+
+[node name="PlayPushButton" type="Button" parent="UILayer"]
+offset_left = 1031.0
+offset_top = 594.0
+offset_right = 1132.0
+offset_bottom = 626.0
+text = "PlayPush"
+
+[node name="PushButton" type="Button" parent="UILayer"]
+offset_left = 641.0
+offset_top = 416.0
+offset_right = 742.0
+offset_bottom = 448.0
+text = "PUSH"
+
+[node name="SelectDoubleButton" type="Button" parent="UILayer"]
+offset_left = 449.0
+offset_top = 416.0
+offset_right = 550.0
+offset_bottom = 448.0
+text = "SELECT DB"
+
+[node name="DrawButton" type="Button" parent="UILayer"]
+offset_left = 548.0
+offset_top = 366.0
+offset_right = 643.0
+offset_bottom = 401.0
+text = "DRAW"
+
+[node name="LeftMoveButton" type="Button" parent="UILayer"]
+offset_left = 520.0
+offset_top = 607.0
+offset_right = 553.0
+offset_bottom = 638.0
+text = "<"
+
+[node name="RightMoveButton" type="Button" parent="UILayer"]
+offset_left = 640.0
+offset_top = 607.0
+offset_right = 673.0
+offset_bottom = 638.0
+text = ">
+"
+
+[node name="WinView" type="Control" parent="UILayer"]
+visible = false
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="ColorRect" type="ColorRect" parent="UILayer/WinView"]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+color = Color(0, 0, 0, 0.529412)
+
+[node name="WinLabel" type="Label" parent="UILayer/WinView"]
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -277.0
+offset_top = -87.5
+offset_right = 277.0
+offset_bottom = 87.5
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_font_sizes/font_size = 128
+text = "U FAILED"
+horizontal_alignment = 1
+
+[node name="GameFlowController" type="Node" parent="." node_paths=PackedStringArray("draw_button")]
+script = ExtResource("6_ww3ou")
+draw_button = NodePath("../UILayer/DrawButton")
+
+[connection signal="pressed" from="UILayer/PlayPushButton" to="." method="_on_play_push_button_pressed"]
+[connection signal="pressed" from="UILayer/PushButton" to="." method="_on_play_push_button_pressed"]
+[connection signal="pressed" from="UILayer/SelectDoubleButton" to="." method="_on_select_double_button_pressed"]
+[connection signal="pressed" from="UILayer/DrawButton" to="." method="_on_draw_button_pressed"]
+[connection signal="pressed" from="UILayer/LeftMoveButton" to="." method="_on_left_move_button_pressed"]
+[connection signal="pressed" from="UILayer/RightMoveButton" to="." method="_on_right_move_button_pressed"]
