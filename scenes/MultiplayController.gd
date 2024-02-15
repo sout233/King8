@@ -6,11 +6,11 @@ signal player_this_info_updated(player_id,new_player_info,extra_index)
 signal player_disconnected(peer_id)
 signal server_disconnected
 
-const PORT = 6991
-const DEFAULT_SERVER_IP = "127.0.0.1"
 const MAX_CONNECTIONS = 20
 
 @export var players: Dictionary = {}
+@export var IPTextEdit:TextEdit
+@export var PortTextEdit:TextEdit
 
 var player_info = {"name": "Name", "cards": {0: "2", 1: "2", 2: "ACE"}}:
 	set(value):
@@ -38,7 +38,7 @@ func _ready():
 
 func join_game():
 	var peer = ENetMultiplayerPeer.new()
-	var error = peer.create_client(DEFAULT_SERVER_IP, PORT)
+	var error = peer.create_client(IPTextEdit.text, int(PortTextEdit.text))
 	if error:
 		printerr(error)
 		return
@@ -47,7 +47,7 @@ func join_game():
 
 func create_game():
 	var peer = ENetMultiplayerPeer.new()
-	var error = peer.create_server(PORT, MAX_CONNECTIONS)
+	var error = peer.create_server(int(PortTextEdit.text), MAX_CONNECTIONS)
 	if error:
 		printerr(error)
 		return

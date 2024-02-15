@@ -7,13 +7,15 @@
 [ext_resource type="Script" path="res://scenes/JoinButton.gd" id="4_3yh6e"]
 [ext_resource type="Script" path="res://scenes/GameFlowController.gd" id="6_ww3ou"]
 
-[node name="Main" type="Node2D" node_paths=PackedStringArray("main_layer", "bottom_card_stack", "top_card_stack", "win_view")]
+[node name="Main" type="Node2D" node_paths=PackedStringArray("main_layer", "bottom_card_stack", "top_card_stack", "win_view", "ip_text_edit", "port_text_edit")]
 script = ExtResource("1_o6hkd")
 main_layer = NodePath("MainLayer")
 card_scene = ExtResource("2_cwt7j")
 bottom_card_stack = NodePath("MainLayer/BottomCardStack")
 top_card_stack = NodePath("MainLayer/TopCardStack")
 win_view = NodePath("UILayer/WinView")
+ip_text_edit = NodePath("UILayer/IPTextEdit")
+port_text_edit = NodePath("UILayer/PortTextEdit")
 
 [node name="BackgroundLayer" type="CanvasLayer" parent="."]
 layer = -1
@@ -56,7 +58,26 @@ text = "Join
 "
 script = ExtResource("4_3yh6e")
 
+[node name="IPTextEdit" type="TextEdit" parent="UILayer"]
+offset_left = 14.0
+offset_top = 52.0
+offset_right = 191.0
+offset_bottom = 81.0
+theme_override_font_sizes/font_size = 12
+text = "127.0.0.1"
+placeholder_text = "IP"
+
+[node name="PortTextEdit" type="TextEdit" parent="UILayer"]
+offset_left = 14.0
+offset_top = 92.0
+offset_right = 103.0
+offset_bottom = 121.0
+theme_override_font_sizes/font_size = 12
+text = "6991"
+placeholder_text = "PORT"
+
 [node name="PlayPushButton" type="Button" parent="UILayer"]
+visible = false
 offset_left = 1031.0
 offset_top = 594.0
 offset_right = 1132.0

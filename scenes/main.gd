@@ -5,6 +5,8 @@ extends Node2D
 @export var bottom_card_stack: Node2D
 @export var top_card_stack: Node2D
 @export var win_view: Control
+@export var ip_text_edit: TextEdit
+@export var port_text_edit: TextEdit
 
 var bottom_start_pos: Vector2 = Vector2(50, 530)
 var top_start_pos: Vector2 = Vector2(50, 100)
@@ -17,6 +19,8 @@ var increse_num = 114514
 var is_game_started := false
 
 func _ready() -> void:
+	MultiplayController.IPTextEdit= ip_text_edit
+	MultiplayController.PortTextEdit= port_text_edit
 	MultiplayController.player_connected.connect(on_player_connected)
 	MultiplayController.player_1_info_updated.connect(on_player_1_info_updated)
 	MultiplayController.player_this_info_updated.connect(on_player_this_info_updated)
