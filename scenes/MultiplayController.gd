@@ -38,6 +38,8 @@ func _ready():
 
 func join_game():
 	var peer = ENetMultiplayerPeer.new()
+	print(IPTextEdit.text)
+	print(PortTextEdit.text)
 	var error = peer.create_client(IPTextEdit.text, int(PortTextEdit.text))
 	if error:
 		printerr(error)

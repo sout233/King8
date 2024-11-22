@@ -1,8 +1,4 @@
-res://scenes/GameFlowController.gd
-res://scenes/king8helper.gd
-res://scenes/card.gd
-res://scenes/main.gd
-res://scenes/MultiplayController.gd
 res://scenes/main.tscn
-res://scenes/CardStack.gd
-res://scenes/CreateButton.gd
+res://scenes/main.gd
+res://scenes/GameFlowController.gd
+res://scenes/MultiplayController.gd
